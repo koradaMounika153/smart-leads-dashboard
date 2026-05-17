@@ -12,7 +12,7 @@ function ProtectedRoute({
     localStorage.getItem("token");
 
   if (!token) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

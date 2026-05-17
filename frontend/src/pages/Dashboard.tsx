@@ -13,16 +13,17 @@ interface Lead {
 }
 
 function Dashboard() {
-  const [leads, setLeads] = useState<Lead[]>(
-    []
-  );
+  const [leads, setLeads] = useState<
+    Lead[]
+  >([]);
 
   const [loading, setLoading] =
     useState(false);
 
   const [name, setName] = useState("");
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] =
+    useState("");
 
   const [status, setStatus] =
     useState("New");
@@ -39,7 +40,8 @@ function Dashboard() {
   const [filterSource, setFilterSource] =
     useState("");
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] =
+    useState(1);
 
   const [totalPages, setTotalPages] =
     useState(1);
@@ -62,7 +64,9 @@ function Dashboard() {
 
       setLeads(response.data.leads);
 
-      setTotalPages(response.data.totalPages);
+      setTotalPages(
+        response.data.totalPages
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -99,7 +103,7 @@ function Dashboard() {
     } catch (error) {
       console.log(error);
 
-      alert("Failed to create lead");
+      alert("Create Lead Failed");
     }
   };
 
@@ -120,7 +124,7 @@ function Dashboard() {
     } catch (error) {
       console.log(error);
 
-      alert("Delete failed");
+      alert("Delete Lead Failed");
     }
   };
 
@@ -163,6 +167,8 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
+      {/* HEADER */}
+
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">
           Smart Leads Dashboard
@@ -192,8 +198,10 @@ function Dashboard() {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded shadow mb-6">
-        <h2 className="text-xl font-bold mb-4">
+      {/* CREATE LEAD BOX */}
+
+      <div className="bg-white rounded shadow p-6 mb-6">
+        <h2 className="text-2xl font-bold mb-4">
           Create Lead
         </h2>
 
@@ -271,7 +279,13 @@ function Dashboard() {
         </button>
       </div>
 
-      <div className="bg-white p-4 rounded shadow mb-6">
+      {/* FILTERS BOX */}
+
+      <div className="bg-white rounded shadow p-6 mb-6">
+        <h2 className="text-2xl font-bold mb-4">
+          Filters
+        </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input
             type="text"
@@ -287,7 +301,9 @@ function Dashboard() {
             className="border p-2 rounded"
             value={filterStatus}
             onChange={(e) =>
-              setFilterStatus(e.target.value)
+              setFilterStatus(
+                e.target.value
+              )
             }
           >
             <option value="">
@@ -315,7 +331,9 @@ function Dashboard() {
             className="border p-2 rounded"
             value={filterSource}
             onChange={(e) =>
-              setFilterSource(e.target.value)
+              setFilterSource(
+                e.target.value
+              )
             }
           >
             <option value="">
@@ -337,7 +355,15 @@ function Dashboard() {
         </div>
       </div>
 
+      {/* LEADS TABLE */}
+
       <div className="bg-white rounded shadow overflow-hidden">
+        <div className="p-4 border-b">
+          <h2 className="text-2xl font-bold">
+            Leads List
+          </h2>
+        </div>
+
         {loading ? (
           <p className="p-6 text-center">
             Loading...
@@ -435,11 +461,13 @@ function Dashboard() {
 
         {!loading &&
           leads.length === 0 && (
-            <p className="p-4 text-center">
+            <p className="p-6 text-center">
               No Leads Found
             </p>
           )}
       </div>
+
+      {/* PAGINATION */}
 
       <div className="flex justify-center gap-4 mt-6">
         <button
